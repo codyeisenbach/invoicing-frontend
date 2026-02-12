@@ -15,9 +15,10 @@ export const getServerSideProps = async () => {
     return {
       props: { invoices },
     };
-  } catch (err) {
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Unknown message";
     return {
-      props: { invoices: [], error: err.message },
+      props: { invoices: [], error: message },
     };
   }
 };
